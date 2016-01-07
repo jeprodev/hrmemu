@@ -26,7 +26,7 @@
     </languages>
 
     <updateservers>
-        <server type="extension" name="hrmenu" priority="1" >http://github.com/jeprodev/hrmenu_update.xml</server>
+        <server type="extension" name="hrmenu" priority="1" >http://github.com/jeprodev/hrmenu/hrmenu_update.xml</server>
     </updateservers>
 
     <config>
