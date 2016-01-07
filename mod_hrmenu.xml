@@ -1,4 +1,190 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension version="3.0" type="module" client="site" method="upgrade" >
+    <name>hrmenu</name>
+    <creationDate>15 -7 - 2012</creationDate>
+    <author>jeprodev</author>
+    <authorEmail>jeprodev@gmail.com</authorEmail>
+    <authorUrl>jeprodev.net</authorUrl>
+    <version>1.0.1</version>
+    <description>MOD_HRMENU_XML_DESCRIPTION</description>
+
+    <files>
+        <filename module="mod_hrmenu">mod_hrmenu.php</filename>
+        <filename module="mod_hrmenu">mod_hrmenu.xml</filename>
+        <filename module="mod_hrmenu">helper.php</filename>
+        <filename module="mod_hrmenu">index.html</filename>
+        <folder>tmpl</folder>
+        <folder>assets</folder>
+        <folder>language</folder>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB.mod_hrmenu.ini</language>
+        <language tag="en-GB">language/en-GB.mod_hrmenu.sys.ini</language>
+        <language tag="fr-FR">language/fr-FR.mod_hrmenu.ini</language>
+        <language tag="fr-FR">language/fr-FR.mod_hrmenu.sys.ini</language>
+    </languages>
+
+    <updateservers>
+        <server type="extension" name="hrmenu" priority="1" >http://github.com/jeprodev/hrmenu_update.xml</server>
+    </updateservers>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="module_class_sfx" type="text" size="35" label="MOD_HRMENU_MODULE_CLASS_FX_LABEL" description="MOD_HRMENU_MODULE_CLASS_FX_DESC" />
+                <field name="hrmenu_type" type="menu" label="MOD_HRMENU_MENU_TYPE_LABEL" description="MOD_HRMENU_MENU_TYPE_DESC" />
+                <field name="hrmenu_id" type="text" size="35" default="hrmenu" label="MOD_HRMENU_MENU_WRAPPER_ID_LABEL" description="MOD_HRMENU_MENU_WRAPPER_ID_DESC" />
+                <field name="hrmenu_start_level" type="list" default="1" label="MOD_HRMENU_START_LEVEL_LABEL" description="MOD_HRMENU_START_LEVEL_DESC" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </field>
+                <field name="hrmenu_end_level" type="list" default="6" label="MOD_HRMENU_END_LEVEL_LABEL" description="MOD_HRMENU_END_LEVEL_DESC" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </field>
+                <field name="hrmenu_sub_menu_width" type="text" default="160" label="MOD_HRMENU_SUB_MENU_WIDTH_LABEL" description="MOD_HRMENU_SUB_MENU_WIDTH_DESC" />
+                <field name="hrmenu_dependant_items" type="radio" class="btn-group" default="1" label="MOD_HRMENU_DEPENDANT_ITEMS_LABEL" description="MOD_HRMENU_DEPENDANT_ITEMS_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+            </fieldset>
+            <fieldset name="HRMENU_LAYOUT_CONFIG">
+                <field name="hrmenu_layout" type="filelist" default="horizontal" label="MOD_HRMENU_LAYOUT_LABEL" description="MOD_HRMENU_LAYOUT_DESC" directory="modules/mod_hrmenu/tmpl" stripext="true" filter=".php" />
+                <field name="hrmenu_theme" type="folderlist" default="jeprodev" directory="modules/mod_hrmenu/assets/themes" label="MOD_HRMENU_THEME_LABEL" description="MOD_HRMENU_THEME_DESC" />
+                <field name="hrmenu_direction" type="radio" default="down" class="btn-group" label="MOD_HRMENU_DIRECTION_LABEL" description="MOD_HRMENU_DIRECTION_DESC">
+                    <option value="top">MOD_HRMENU_TOP_LABEL</option>
+                    <option value="down">MOD_HRMENU_DOWN_LABEL</option>
+                </field>
+                <field name="hrmenu_height" type="text" default="35" label="MOD_HRMENU_MENU_HEIGHT_LABEL" description="MOD_HRMENU_HEIGHT_DESC"/>
+                <field name="hrmenu_use_gradient_background" type="radio" class="btn-group" default="1" label="MOD_HRMENU_USE_GRADIENT_BACKGROUND_LABEL" description="MOD_HRMENU_USE_GRADIENT_BACKGROUND_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_top_gradient_color" type="text" default="#ffffff" label="MOD_HRMENU_TOP_GRADIENT_COLOR_LABEL" description="MOD_HRMENU_TOP_GRADIENT_COLOR_DESC" />
+                <field name="hrmenu_bottom_gradient_color" type="text" default="#e4e4e4" label="MOD_HRMENU_BOTTOM_GRADIENT_COLOR_LABEL" description="MOD_HRMENU_BOTTOM_GRADIENT_COLOR_DESC" />
+                <field name="hrmenu_use_image_background" type="radio" default="0" class="btn-group" label="MOD_HRMENU_USE_IMAGE_BACKGROUND_LABEL" description="MOD_HRMENU_USE_IMAGE_BACKGROUND_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_background_image_path" type="imagelist" default="" directory="modules/mod_hrmenu/assets/images/background" label="MOD_HRMENU_BACKGROUND_IMAGE_LABEL" description="MOD_HRMENU_BACKGROUND_IMAGE_DESC" />
+                <field name="hrmenu_set_border_radius" type="radio" class="btn-group" default="1" label="MOD_HRMENU_BORDER_RADIUS_LABEL" description="MOD_HRMENU_SET_BORDER_RADIUS_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_top_left_border_radius" type="text" default="5" label="MOD_HRMENU_TOP_LEFT_BORDER_RADIUS_LABEL" description="MOD_HRMENU_TOP_LEFT_BORDER_RADIUS_DESC" />
+                <field name="hrmenu_top_right_border_radius" type="text" default="5" label="MOD_HRMENU_TOP_RIGHT_BORDER_RADIUS_LABEL" description="MOD_HRMENU_TOP_RIGHT_BORDER_RADIUS_DESC" />
+                <field name="hrmenu_bottom_right_border_radius" type="text" default="5" label="MOD_HRMENU_BOTTOM_RIGHT_BORDER_RADIUS_LABEL" description="MOD_HRMENU_BOTTOM_RIGHT_BORDER_RADIUS_DESC" />
+                <field name="hrmenu_bottom_left_border_radius" type="text" default="5" label="MOD_HRMENU_BOTTOM_LEFT_BORDER_RADIUS_LABEL" description="MOD_HRMENU_BOTTOM_LEFT_BORDER_RADIUS_DESC" />
+                <field name="hrmenu_separator_path" type="imagelist" default="null" directory="modules/mod_hrmenu/assets/images/separator" label="MOD_HRMENU_LEVEL_1_SEPARATOR_LABEL" description="MOD_HRMENU_LEVEL_1_SEPARATOR_DESC" />
+                <field name="hrmenu_level_1_font_size" type="text" default="16" label="MOD_HRMENU_LEVEL_1_FONT_SIZE_LABEL" description="MOD_HRMENU_LEVEL_1_FONT_SIZE_DESC" />
+            </fieldset>
+            <fieldset name="HRMENU_EFFECT_CONFIG">
+                <field name="hrmenu_transition" type="list" default="bounce" label="MOD_HRMENU_TRANSITION_LABEL" description="MOD_HRMENU_TRANSITION_DESC">
+                    <option value="back">MOD_HRMENU_BACK_LABEL</option>
+                    <option value="bounce">MOD_HRMENU_BOUNCE_LABEL</option>
+                    <option value="circ">MOD_HRMENU_CIRCLE_LABEL</option>
+                    <option value="elastic">MOD_HRMENU_ELASTIC_LABEL</option>
+                    <option value="expo">MOD_HRMENU_EXPO_LABEL</option>
+                    <option value="linear">MOD_HRMENU_LINEAR_LABEL</option>
+                    <option value="pow">MOD_HRMENU_POWER_LABEL</option>
+                    <option value="quart">MOD_HRMENU_QUART_LABEL</option>                                                                                                         c
+                    <option value="quint">MOD_HRMENU_QUINT_LABEL</option>
+                    <option value="sine">MOD_HRMENU_SINE_LABEL</option>
+                </field>
+                <field name="hrmenu_ease" type="list" default="easeIn" label="MOD_HRMENU_EASE_LABEL" description="MOD_HRMENU_EASE_DESC" >
+                    <option value="in">MOD_HRMENU_EASE_IN_LABEL</option>
+                    <option value="out">MOD_HRMENU_EASE_OUT_LABEL</option>
+                </field>
+                <field name="hrmenu_duration" type="text" default="500" label="MOD_HRMENU_DURATION_LABEL" description="MOD_HRMENU_DURATION_DESC" suffix="ms" />
+                <field name="hrmenu_time_out" type="text" default="500" label="MOD_HRMENU_TIME_OUT_LABEL" description="MOD_HRMENU_TIME_OUT_DESC" suffix="ms" />
+                <field name="hrmenu_time_in" type="text" default="0" label="MOD_HRMENU_TIME_IN_LABEL" description="MOD_HRMENU_TIME_IN_DESC" suffix="ms"/>
+                <field name="hrmenu_command_type" type="list" default="moo_menu" label="MOD_HRMENU_COMMAND_TYPE_LABEL" description="MOD_HRMENU_COMMAND_TYPE_DESC" >
+                    <option value="click">MOD_HRMENU_CLICK_COMMAND_LABEL</option>
+                    <option value="click_to_close">MOD_HRMENU_CLICK_CLOSE_COMMAND_LABEL</option>
+                    <option value="hrmenu">MOD_HRMENU_HRMENU_COMMAND_LABEL</option>
+                    <option value="moo_menu">MOD_HRMENU_MOO_MENU_COMMAND_LABEL</option>
+                </field>
+                <field name="hrmenu_open_type" type="list" default="open" label="MOD_HRMENU_OPEN_TYPE_LABEL" description="MOD_HRMENU_OPEN_TYPE_DESC">
+                    <option value="slide">MOD_HRMENU_SLIDE_LABEL</option>
+                    <option value="open">MOD_HRMENU_OPEN_LABEL</option>
+                    <option value="no_effect">MOD_HRMENU_NO_EFFECT_LABEL</option>
+                </field>
+                <field name="hrmenu_stop_drop_level" type="radio" class="btn-group" default="0"  label="MOD_HRMENU_STOP_DROP_LEVEL_LABEL" description="MOD_HRMENU_STOP_DROP_LEVEL_DESC">
+                    <option value="1" >MOD_HRMENU_YES</option>
+                    <option value="0" >MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_use_opacity" type="radio" default="1" class="btn-group" label="MOD_HRMENU_USE_OPACITY_LABEL" description="MOD_HRMENU_USE_OPACITY_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_test_overflow" type="radio" default="1" class="btn-group" label="MOD_HRMENU_TEST_OVERFLOW_LABEL" description="MOD_HRMENU_OVERFLOW_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_direction_offset1" type="text" default="25" label="MOD_HRMENU_DIRECTION_OFFSET_1_LABEL" description="MOD_HRMENU_DIRECTION_OFFSET_1_DESC" />
+                <field name="hrmenu_direction_offset2" type="text" default="25" label="MOD_HRMENU_DIRECTION_OFFSET_2_LABEL" description="MOD_HRMENU_DIRECTION_OFFSET_2_DESC" />
+            </fieldset>
+            <fieldset name="FANCY_EFFECT_CONFIG">
+                <field name="hrmenu_use_fancy" type="radio" default="1" class="btn-group" label="MOD_HRMENU_USE_FANCY_LABEL" description="MOD_HRMENU_USE_FANCY_DESC" >
+                    <option value="1">MOD_HRMENU_YES</option>
+                    <option value="0">MOD_HRMENU_NO</option>
+                </field>
+                <field name="hrmenu_fancy_transition" type="list" default="linear" label="MOD_HRMENU_FANCY_TRANSITION_LABEL" description="MOD_HRMENU_FANCY_TRANSITION_DESC">
+                    <option value="linear">MOD_HRMENU_LINEAR_LABEL</option>
+                    <option value="swing">MOD_HRMENU_SWING_LABEL</option>
+                    <!--option value="easeInQuad">MOD_HRMENU_EASE_IN_QUAD_LABEL</option>
+                    <option value="easeOutQuad">MOD_HRMENU_EASE_OUT_QUAD_LABEL</option>
+                    <option value="easeInOutQuad">MOD_HRMENU_EASE_IN_OUT_QUAD_LABEL</option>
+                    <option value="easeInCubic">MOD_HRMENU_EASE_IN_CUBIC_LABEL</option>
+                    <option value="easeOutCubic">MOD_HRMENU_EASE_OUT_CUBIC_LABEL</option>
+                    <option value="easeInOutCubic">MOD_HRMENU_EASE_IN_OUT_CUBIC_LABEL</option>
+                    <option value="easeInBack">MOD_HRMENU_EASE_IN_QUINT_LABEL</option>
+                    <option value="easeOutBack">MOD_HRMENU_EASE_OUT_QUINT_LABEL</option>
+                    <option value="easeInOutBack">MOD_HRMENU_EASE_IN_OUT_QUINT_LABEL</option>
+                    <option value="easeInBounce">MOD_HRMENU_EASE_IN_BOUNCE_LABEL</option>
+                    <option value="easeOutBounce">MOD_HRMENU_EASE_OUT_BOUNCE_LABEL</option>
+                    <option value="easeInOutBounce">MOD_HRMENU_EASE_IN_OUT_BOUNCE_LABEL</option>
+                    <option value="easeInCirc">MOD_HRMENU_EASE_IN_CIRC_LABEL</option>
+                    <option value="easeOutCirc">MOD_HRMENU_EASE_OUT_CIRC_LABEL</option>
+                    <option value="easeInOutCirc">MOD_HRMENU_EASE_IN_OUT_CIRC_LABEL</option>
+                    <option value="easeInElastic">MOD_HRMENU_EASE_IN_ELASTIC_LABEL</option>
+                    <option value="easeOutElastic">MOD_HRMENU_EASE_OUT_ELASTIC_LABEL</option>
+                    <option value="easeInOutElastic">MOD_HRMENU_EASE_IN_OUT_ELASTIC_LABEL</option>
+                    <option value="easeInExpo">MOD_HRMENU_EASE_IN_EXPO_LABEL</option>
+                    <option value="easeOutExpo">MOD_HRMENU_EASE_OUT_EXPO_LABEL</option>
+                    <option value="easeInOutExpo">MOD_HRMENU_EASE_IN_OUT_EXPO_LABEL</option>
+                    <option value="easeInQuart">MOD_HRMENU_EASE_IN_QUART_LABEL</option>
+                    <option value="easeOutQuart">MOD_HRMENU_EASE_OUT_QUART_LABEL</option>
+                    <option value="easeInOutQuart">MOD_HRMENU_EASE_IN_OUT_QUART_LABEL</option>
+                    <option value="easeInQuint">MOD_HRMENU_EASE_IN_QUINT_LABEL</option>
+                    <option value="easeOutQuint">MOD_HRMENU_EASE_OUT_QUINT_LABEL</option>
+                    <option value="easeInOutQuint">MOD_HRMENU_EASE_IN_OUT_QUINT_LABEL</option>
+                    <option value="easeInSine">MOD_HRMENU_EASE_IN_SINE_LABEL</option>
+                    <option value="easeOutSine">MOD_HRMENU_EASE_OUT_SINE_LABEL</option>
+                    <option value="easeInOutSine">MOD_HRMENU_EASE_IN_OUT_SINE_LABEL</option -->
+                </field>
+                <field name="hrmenu_fancy_duration" type="text" default="500" label="MOD_HRMENU_FANCY_DURATION_LABEL" description="MOD_HRMENU_FANCY_DURATION_DESC" />
+                <field name="hrmenu_fancy_background" type="imagelist" default="black_bg.png" directory="modules/mod_hrmenu/assets/images/fancy" label="MOD_HRMENU_SET_FANCY_BACKGROUND_IMAGE_PATH_LABEL" description="MOD_HRMENU_SET_FANCY_BACKGROUND_PATH_DESC" />
+
+            </fieldset>
+        </fields>
+    </config>
 
 </extension>
