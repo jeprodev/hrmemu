@@ -1,0 +1,194 @@
+/**
+** This file assume the good working conditions
+** No styling (color, background,...) should be made here, only positioning and management
+**/
+div#hrmenu_container{position: relative; display: block; z-index:0;  width:96%; margin:0 auto; }
+
+/** menu **/
+div.hrmenu_wrapper{ width:100%; line-height: 21px;  text-align: left; zoom: 1; }
+
+/** container style **/
+ul.nav_hrmenu{
+    clear: both; position:relative; z-index:999; overflow: visible !important; display: block !important; visibility: visible !important;
+    opacity: 1 !important; list-style: none; margin:0 auto; height: auto; padding: 0 20px; filter :none; text-align:left; zoom: 1;
+}
+
+/**---- Level 1 items styles ---**/
+div.hrmenu_logo{ display:none; }
+ul.nav_hrmenu li.level1, ul.nav_hrmenu div.hrmenu_logo{
+    display: inline-block; float: none !important; position: static; list-style: none; text-align: center; margin: 0 10px 0 0;
+    cursor: pointer; vertical-align: middle; box-shadow: none; filter: none;
+}
+ul.nav_hrmenu li.hrmenu.level1 > div.hrmenu_title{ margin: 9px 15px 0 0; border:1px solid green;}
+ul.nav_hrmenu li.hrmenu.level1 > a div.hrmenu_title{ margin: 8px 15px 0 0; }
+
+/** item color on mouseover**/
+ul.nav_hrmenu li.hrmenu.level1:hover > a div.hrmenu_title, ul.nav_hrmenu li.hrmenu.level1.active > a div.hrmenu_title,
+ul.nav_hrmenu li.hrmenu.level1:hover > div.separator, ul.nav_hrmenu li.hrmenu.level1.active > div.separator
+{ color: #161616; text-shadow: 1px 1px 1px #fff; }
+
+ul.nav_hrmenu li.level1.parent > a, ul.nav_hrmenu li.level1.parent > div.separator{ padding: 0 12px 0 0; }
+
+/* arrow image for parent item */
+ul.nav_hrmenu li.level1.parent > a, ul.nav_hrmenu li.level1.parent > span.separator { padding: 0 12px 0 0; }
+ul.nav_hrmenu li.level1.parent > a:after, ul.nav_hrmenu li.level1.parent > span.separator:after{
+    content: ""; display: block; position: absolute; width: 0; height: 0; border-style: solid; border-width: 6px 5px 0 5px;
+    border-color: #444 transparent transparent transparent; top: 14px; right:8px;
+}
+/* parent item on mouseover (if sub-menus exists) horizontal menu only */
+ul.nav_hrmenu li.hrmenu.level1.parent:hover{
+    -moz-border-radius: 5px 5px 0 0; -webkit-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0;
+}
+
+/* arrow image for submenu parent item */
+ul.nav_hrmenu li.level1.parent li.parent > a:after, ul.nav_hrmenu li.level1.parent li.parent > div.separator:after,
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 li.parent > a:after{
+    display: inline-block; content: ""; height: 0; width: 0; border-style: solid; border-width: 6px 0 6px 7px; margin:3px; position: absolute;
+    border-color: transparent transparent transparent #015B86; float: right; right: 3px; top: 2px;
+}
+ul.nav_hrmenu li.level1.parent li.parent:hover > a:after, ul.nav_hrmenu li.level1.parent li.parent:hover > div.separator:after,
+ul.nav_hrmenu li.level1.parent li.parent.active > a:after, ul.nav_hrmenu li.level1.parent li.parent.active > div.separator:after{
+    border-left-color: #029FEB;
+}
+/* styles for right position **/
+ul.nav_hrmenu li.hrmenu.level1.align_right, ul.nav_hrmenu li.hrmenu.level1.menu_right, ul.nav_hrmenu li.align_right, ul.nav_hrmenu li.menu_right{
+    float: right !important; margin-right: 0 !important;
+}
+ul.nav_hrmenu li.align_right:not(.full_width) div.hrmenu_float, ul.nav_hrmenu li:not(.full_width) div.hrmenu_float.fix_right{
+    left:auto; right: -1px; top: auto; -moz-border-radius: 5px 0 5px 5px; -webkit-border-radius: 5px 0 5px 5px; border-radius: 5px 0 5px 5px;
+}
+ul.nav_hrmenu li div.hrmenu_float.fix_right{
+    -moz-border-radius: 5px 0 5px 5px; -webkit-border-radius: 5px 0 5px 5px; border-radius: 5px 0 5px 5px;
+}
+
+/**-------- sub level items - level 2 to n --------**/
+ul.nav_hrmenu li div.hrmenu_float ul.hrmenu_2, ul.hrmenu_2{
+    z-index: 11000; clear: left; text-align: left; background: transparent; margin: 0 !important; padding: 0 !important; border: none !important;
+    box-shadow: none !important; width: 100%; position: static !important; overflow: visible !important; display: block !important;
+    float: none !important; visibility: visible;
+}
+
+ul.nav_hrmenu li ul.hrmenu_2 li.hrmenu, ul.hrmenu_2, ul.hrmenu_2 li.hrmenu{
+    text-align: left; z-index: 11001; font-size: 12px; position: static; text-shadow: 1px 1px 1px #ffffff; padding: 5px 0; margin: 0 0 4px 0;
+    float:none !important; background: none; list-style: none; display: block !important;
+}
+ul.nav_hrmenu li ul.hrmenu_2 li.hrmenu:hover, ul.hrmenu_2 li.hrmenu:hover{ background: transparent; }
+
+/** all links styles **/
+ul.nav_hrmenu li.hrmenu a, ul.nav_hrmenu li.hrmenu span.separator, ul.hrmenu_2 li.hrmenu a, ul.hrmenu_2 li.hrmenu span.separator{
+    margin: 0; font-weight: normal; color: #A1A1A1; display:block; text-decoration: none; text-transform: none; outline:none;
+    background: none; filter: none; border: none; padding: 0 5px; white-space: normal; box-shadow: none; position: relative;
+}
+
+/** submenu link **/
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 li a, ul.hrmenu_2 li a{ color: #015B86; text-shadow: 1px 1px 1px #fff; }
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 a, ul.hrmenu_2 a{ font-size: 12px; color: #161616; display: block; position: relative; }
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 li:hover > a, ul.nav_hrmenu li.hrmenu ul.hrmenu_2 li:hover > h2 a,
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 li:hover > h3 a, ul.nav_hrmenu li.hrmenu ul.hrmenu_2 li.active > a,
+ul.hrmenu_2 li:hover > a, ul.hrmenu_2 li:hover > h2 a, ul.hrmenu_2 li:hover > h3 a, ul.hrmenu_2 li.active > a {
+    background: transparent; color: #029FEB;
+}
+
+li.hrmenu > a img{ margin: 3px; border:none; }
+li.hrmenu img{ border: none; }
+span.hrmenu_title{ text-decoration: none; min-height: 17px; float: none !important; margin: 0; }
+span.hrmenu_desc{ display:block; text-transform: none; font-size: 10px; text-decoration: none; height:12px; float: left; }
+
+/**-- sub menus ----**/
+div.hrmenu_float{
+    position: absolute; display: none; margin:27px 0 0 -10px; text-align:left; padding:5px 5px 0 5px; border:1px solid #777; border-top:none;
+    background: #F4F4F4; background: -moz-linear-gradient(top, #EEEEEE, #BBBBBB);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEEEEE), to(#BBBBBB)); -moz-border-radius: 0 5px 5px 5px;
+    -webkit-border-radius: 0 5px 5px 5px; border-radius: 0 5px 5px 5px; filter: none; width:inherit; z-index: 9999;
+}
+div.hrmenu_drop_main{ width: 160px; }
+.hrmenu_push_down div.hrmenu_float{ margin: 0; }
+
+/* child blocks position (from level2 to n) */
+ul.hrmenu_2 li.hrmenu div.hrmenu_float{
+    margin: -20px  0 0 95%; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border:1px solid #777;
+}
+ul.nav_hrmenu li:hover:not(.hrmenu_animation) div.hrmenu_float div.hrmenu_float, ul.nav_hrmenu li:hover:not(.hrmenu_animation) div.hrmenu_float div.hrmenu_float,
+ul.nav_hrmenu li.sfhover:not(.hrmenu_animation) div.hrmenu_float div.hrmenu_float, ul.nav_hrmenu li.sfhover:not(.hrmenu_animation) div.hrmenu_float div.hrmenu_float{
+    display: none;
+}
+
+ul.nav_hrmenu li.hrmenu:hover > div.hrmenu_float, ul.nav_hrmenu li.hrmenu:hover > div.hrmenu_float li.hrmenu:hover > div.hrmenu_float,
+ul.nav_hrmenu li.hrmenu:hover > div.hrmenu_float li.hrmenu:hover > div.hrmenu_float,
+ul.nav_hrmenu li.hrmenu:hover > div.hrmenu_float li.hrmenu:hover > div.hrmenu_float li.hrmenu:hover > div.hrmenu_float li.hrmenu:hover > div.hrmenu_float,
+ul.nav_hrmenu li.sfhover > div.hrmenu_float, ul.nav_hrmenu li.sfhover > div.hrmenu_float li.sfhover > div.hrmenu_float li.sfhover > div.hrmenu_float,
+ul.nav_hrmenu li.sfhover > div.hrmenu_float li.sfhover > div.hrmenu_float li.sfhover > div.hrmenu_float li.sfhover > div.hrmenu_float { display:block; }
+div.hrmenu_mod ul{ display: block; }
+
+/**------ Columns Management ------**/
+ul.nav_hrmenu li div.hrmenu_float div.hrmenu_2{ margin: 0; padding: 0; }
+
+/** h2 title **/
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 h2 a, ul.nav_hrmenu li.hrmenu ul.hrmenu_2 h2 span.separator, ul.hrmenu_2 h2 a, ul.hrmenu_2 h2 span.separator{
+    font-size: 21px; font-weight: 400; letter-spacing: -1px; margin: 7px 0 14px 0; padding-bottom: 14px; border-bottom:1px solid #666;
+    line-height: 21px; text-align: left;
+}
+
+/** h3 title ---**/
+ul.nav_hrmenu li.hrmenu ul.hrmenu_2 h3 a, ul.nav_hrmenu li.hrmenu ul.hrmenu_2 h3 span.separator, ul.hrmenu_2 h3 a, ul.hrmenu_2 h3 span.separator{
+    font-size:14px; margin: 7px 0 14px 0; padding-bottom: 7px; border-bottom: 1px solid #888; line-height: 21px; text-align: left;
+}
+
+/**------- Fancy style -----**/
+.hrmenu_fancy_background{
+    position:absolute; top:0; list-style: none; padding: 0 !important; margin:0 !important; border: none !important; z-index: -1
+}
+.hrmenu_fancy_background .hrmenu_fancy_center{ border-top: 1px solid #ffffff; }
+/**---- Button to close on click ----**/
+span.hrmenu_close{ color: #fff; }
+
+/**----- stop drop down ----***/
+ul.nav_hrmenu li.hrmenu.no_drop_down div.hrmenu_float, ul.nav_hrmenu li.hrmenu div.hrmenu_float li.hrmenu.no_drop_down div.hrmenu_float,
+.hrmenu_push_down div.hrmenu_float div.hrmenu_float{
+    position: static; background: none; border:none; left: auto; margin: 3px; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    display: block !important;
+}
+ul.nav_hrmenu li.level1.parent ul.hrmenu_2 li.hrmenu.no_drop_down li.hrmenu, .hrmenu_push_down ul.hrmenu.no_drop_down li.hrmenu{
+    background: none; text-indent: 5px;
+}
+ul.nav_hrmenu li.hrmenu.level1.parent ul.hrmenu_2 li.hrmenu.parent.no_drop_down > a, ul.nav_hrmenu li.hrmenu.level1.parent ul.hrmenu_2 li.hrmenu.parent.no_drop_down > span.separator,
+.hrmenu_push_down ul.hrmenu_2 li.hrmenu.parent.no_drop_down > a, .hrmenu_push_down ul.hrmenu_2 li.hrmenu.parent.no_drop_down > span.separator {
+    background: none;
+}
+/* remove the arrow image for parent item */
+ul.nav_hrmenu li.hrmenu.level1.parent ul.hrmenu_2 li.parent.no_drop_down > *:after, .hrmenu_push_down ul.hrmenu_2 li.parent > *:after{
+    display: none;
+}
+li.hrmenu.no_drop_down > div.hrmenu_float > div.hrmenu_float > div.hrmenu_drop_main{ width: auto; }
+
+/***------------ Full width -------***/
+ul.nav_hrmenu li.full_width > div.hrmenu_float{ margin: 0; padding: 0; width: auto !important; left: 0; right: 0; }
+li.full_width > div.hrmenu_float > div.hrmenu_drop_main { width: auto; }
+
+/**-- responsive media queries -----**/
+@media screen and (max-width: 524px){
+    div#hrmenu_container{ width:100%; }
+    div.hrmenu_wrapper{ width:100%; margin:0 auto;  height: auto !important; }
+    div.hrmenu_wrapper #hrmenu_icon_link{  }
+    div.hrmenu_wrapper ul:not(.no_responsive){ height: auto !important; padding-left: 0 !important; }
+    div.hrmenu_wrapper ul:not(.no_responsive) li{
+        float:none !important; width: 100% !important; padding-right: 0 !important; margin-right: 0 !important;
+    }
+    div.hrmenu_wrapper ul:not(no_responsive) li.hrmenu.level1{
+        text-align: left; letter-spacing: 0.1em;  /*l text-align: left; height: 2em; border-bottom: 1px solid #383838; mrgin-left:2px; */
+    }
+    div.hrmenu_wrapper ul:not(no_responsive) li.hrmenu.level1 > a.hrmenu, div.hrmenu_wrapper div.hrmenu_logo > a{
+        text-transform: uppercase;  text-shadow: none; margin-left:5px;
+    }
+    div.hrmenu_wrapper ul:not(.no_responsive) li > div.hrmenu_float{ width: 100% !important; }
+    div.hrmenu_wrapper ul:not(.no_responsive) div.hrmenu_float div.hrmenu_2{ width:100% !important; }
+    div.hrmenu_wrapper ul:not(.no_responsive) div.hrmenu_float div.hrmenu_float { width:100% !important; margin:20px 0 0 0 !important; }
+    div.hrmenu_wrapper div.hrmenu_logo{
+        display: block !important; margin-left: auto !important; margin-right: auto; !important; float: none !important;
+        background: #1c1c1c; padding: 5px 0;
+    }
+    div.hrmenu_wrapper div.hrmenu_logo #hrmenu_icon_link{ float:left; margin-left: 4px; width:14px; height: 14px;}
+    div.hrmenu_wrapper div.hrmenu_logo #hrmenu_text_link{
+        width:50%; margin-left: 5px; max-width:250px; float: left; font-size:16px; font-weight: bold; color: #161616; text-shadow: 1px 1px 1px #fff;
+    }
+}

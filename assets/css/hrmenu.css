@@ -1,0 +1,26 @@
+/**
+** This file assume the good working conditions
+** No styling (color, background,...) should be made here, only positionning and management
+** /
+div#hrmenu_activity_logo{ width:180px; float:left; height:185px; background: url('../images/microscope.png') no-repeat; position:absolute;left:0; top:-80px; margin-bottom: 5px;}
+div.hrmenu_wrapper_menu{ width:800px; float: right;}
+div.hrmenu_wrapper_menu ul.nav_hrmenu {clear:both; position : relative; z-index:999;}
+div.hrmenu_wrapper_menu ul.nav_hrmenu ul {clear:both;  padding : 0; margin : 0; }
+div.hrmenu_wrapper_menu ul.nav_hrmenu li.hrmenu{float:left; position:relative;  text-align : left; padding : 0; margin : 0;  }
+div.hrmenu_wrapper_menu ul.nav_hrmenu li ul.hrmenu_2 {display:block; z-index:11000; clear:left; padding:0; text-align : left; position : static;  }
+div.hrmenu_wrapper_menu ul.nav_hrmenu li ul li.hrmenu {text-align : left; position : relative; z-index : 11001; padding:0; }
+div.hrmenu_wrapper_menu ul.nav_hrmenu li li.hrmenu a {display: block; padding : 0;  margin : 0;}
+
+div.hrmenu_wrapper_menu ul.nav_hrmenu li div.hrmenu_float{ position : absolute; padding :30px 0 20px 4px; margin : 0; background : url(../images/transparent.gif); }
+div.hrmenu_wrapper_menu div.hrmenu_float ul, div.hrmenu_wrapper_menu div.hrmenu_float ul li{position: static; }
+div.hrmenu_wrapper_menu ul.nav_hrmenu li.hrmenu div.hrmenu_float.fixRight{right: 0;}
+div.hrmenu_wrapper_menu ul.nav_hrmenu li.hrmenu div.hrmenu_float div.hrmenu_float.fixRight{right: 0;}
+
+div.hrmenu_wrapper_menu div.hrmenu_2{float : left; margin : 0; padding : 0;}
+div.hrmenu_wrapper_menu div.clr{clear : both; visibility : hidden;}
+div.hrmenu_wrapper_menu li a:visited:hover{color:#fff;}
+
+div.hrmenu_wrapper_menu ul.hrmenu_2 li.hrmenu a, div.hrmenu_wrapper_menu ul.hrmenu_2 li.hrmenu span.separator{ float: none !important; }
+
+/** fancy parameters **/
+div.hrmenu_wrapper_menu li.hrmenu_fancy_bg{ z-index: 8; position: absolute; top: 0; } 
