@@ -38,7 +38,7 @@ if($params->get("hrmenu_id", '') === ''){ $params->set('hrmenu_id', 'hr_menu_' .
 $menuId = $params->get('hrmenu_id', 'hrmenu');
 $menuWidth = $params->get('hrmenu_sub_menu_width', 160);
 $menuHeight = $params->get('hrmenu_height', 35);
-$hrMenuLayout = $params->get('hrmenu_layout', 'vertical');
+$hrMenuLayout = $params->get('hrmenu_template', 'horizontal');
 $menuTransition = $params->get('hrmenu_transition', 'bounce');
 $menuEase = $params->get('hrmenu_ease', 'easeOut');
 $behavior = $params->get('hrmenu_command_type', 'hrmenu');
@@ -120,7 +120,7 @@ if (JFile::exists('modules/mod_hrmenu/assets/themes/' . $hrMenuTheme . '/css/ie7
 		<![endif]-->';
 }
 /*$document->addStyleSheet('modules/mod_hrmenu/assets/css/hrmenu.css'); */
-modHrMenuHelper::setStyleScript($menuId, $params);
+//modHrMenuHelper::setStyleScript($menuId, $params);
 
 /** add javascript */
 JHtml::_('jquery.framework');
@@ -153,4 +153,4 @@ $js .= " fancyDuration : " . (int) $fancyDuration . "}); });";
 $document->addScriptDeclaration($js);
 //}
 
-require JModuleHelper::getLayoutPath('mod_hrmenu', $params->get('hrmenu_layout', 'horizontal'));
+require JModuleHelper::getLayoutPath('mod_hrmenu', $params->get('hrmenu_template', 'default'));

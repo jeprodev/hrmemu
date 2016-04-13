@@ -23,4 +23,5 @@ div.hrmenu_wrapper_menu li a:visited:hover{color:#fff;}
 div.hrmenu_wrapper_menu ul.hrmenu_2 li.hrmenu a, div.hrmenu_wrapper_menu ul.hrmenu_2 li.hrmenu span.separator{ float: none !important; }
 
 /** fancy parameters **/
-div.hrmenu_wrapper_menu li.hrmenu_fancy_bg{ z-index: 8; position: absolute; top: 0; } 
+div.hrmenu_wrapper_menu li.hrmenu_fancy_bg{ z-index: 8; position: absolute; top: 0; }
+/*

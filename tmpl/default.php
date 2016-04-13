@@ -28,19 +28,25 @@ if ($params->get('hrmenu_command_type', 'click_to_close') == 'click_to_close') {
 $hrMenuFixedClass = ($params->get('hrmenu_position', 0) == 'bottom_fixed') ? ' hrmenu_fixed' : '';
 $direction = $languageDirection == 'rtl' ? 'right' : 'left';
 $start = (int)$params->get('hrmenu_start_level');
+$document = JFactory::getDocument();
 
 ?>
-<div id="hrmenu_container" >
+<div id="hrmenu" class="<?php echo $hrMenuLayout; ?>" >
     <div class="hrmenu_wrapper <?php echo $languageDirection; ?>" id="<?php echo $menuId; ?>" >
         <div id="hrmenu_logo" class="hrmenu_logo" >
-            <a href="#" id="hrmenu_mobile"><div id="hrmenu_icon_link" ><img src="<?php echo JURI::base() . 'modules/mod_hrmenu/assets/images/list-4.png'; ?>" /></div> &nbsp;<div id="hrmenu_text_link" ><?php echo JText::_('MOD_HRMENU_MENU_LABEL'); ?></div></a>
+            <a href="#" id="hrmenu_mobile">
+                <div id="hrmenu_text_link" ><?php echo JText::_('MOD_HRMENU_MENU_LABEL'); ?></div>&nbsp;
+                <div id="hrmenu_icon_link" >
+                    <img src="<?php echo JURI::base() . 'modules/mod_hrmenu/assets/images/list-4.png'; ?>" />
+                </div>
+            </a>
         </div>
         <div class="hrmenu_wrapper_menu"  >
             <ul class="nav_hrmenu <?php if($params->get('module_class_sfx')){ echo $params->get('module_class_sfx', ''); } ?>" > <!-- first level item wrapper -->
                 <?php
                 $zIndex = 35000;
                 if(count($hrMenuItems)){
-                    foreach($hrMenuItems as $item){
+                    foreach($hrMenuItems as $item){ //print_r($item);
                         $item->mobile_data = isset($item->mobile_data) ? $item->mobile_data : '';
                         $itemLevel = ($start > 1) ? $item->level - $start + 1 :  $item->level;
                         if($params->get('hrmenu_called_from_level')){
@@ -49,7 +55,7 @@ $start = (int)$params->get('hrmenu_start_level');
                         $stopDropDown = $params->get('hrmenu_stop_drop_down_level', '0');
                         $stopDropDownClass = ($stopDropDown != '0' && $item->level >= $stopDropDown) ? ' no_drop_down' : '';
 
-                        $createNewRow = (isset($item->createnewrow) AND $item->createnewrow) ? '<div style="clear:both; " ></div>div>' : '';
+                        $createNewRow = (isset($item->createnewrow) AND $item->createnewrow) ? '<div style="clear:both; " ></div><div>' : '';
                         $columnStyles = isset($item->columnwidth) ? ' style="width:' . modHrMenuHelper::checkUnit($item->columnwidth) . '; float:left; " ' : '';
                         $nextColumnStyles = isset($item->nextcolumnwidth) ? 'style="width:' . modHrMenuHelper::checkUnit($item->nextcolumnwidth) . '; float:left;" ' : '';
 
@@ -57,7 +63,7 @@ $start = (int)$params->get('hrmenu_start_level');
                             echo '</ul><div class="clr" ></div></div>' . $createNewRow . '<div class="hrmenu_2" ' . $columnStyles . '><ul class="hrmenu_2" >';
                         }
                         if(isset($item->content) AND $item->content){
-                            echo '<li data-level="' . $itemLevel . '" class="hrmenu hrmenu_module ' . $stopDropDownClass . $item->classes . ' level' . $itemLevel . ' ' . $item->li_class . '" ' . $item->mobile_data . '>' . $item->content;
+                            echo '<li data-level="' . $itemLevel . '" class="hrmenu hrmenu_module ' . $stopDropDownClass . $item->class . ' level' . $itemLevel . ' ' . $item->li_class . '" ' . $item->mobile_data . '>' . $item->content;
                             $item->ftitle;
                         }
 
@@ -134,7 +140,7 @@ $start = (int)$params->get('hrmenu_start_level');
                                 $linkType = '<div class="hrmenu_title" >' . $item->ftitle . $description . '</div>';
                             }
 
-                            echo '<li data-level="' . $itemLevel . '" class="hrmenu' . $stopDropDownClass . $item->classes . ' level' . $itemLevel . ' ' . $item->li_class . '" style="z-index: ' . $zIndex . '; " ' . $item->mobile_data . '>';
+                            echo '<li data-level="' . $itemLevel . '" class="hrmenu' . $stopDropDownClass . $item->class . ' level' . $itemLevel . ' ' . $item->liclass . '" style="z-index: ' . $zIndex . '; " ' . $item->mobile_data . '>';
                             switch($item->type){
                                 case 'separator' :
                                     echo $openTag . '<div class="separator ' . $item->anchor_css . '">' . $linkType . '</div>' . $closeTag;
@@ -169,7 +175,7 @@ $start = (int)$params->get('hrmenu_start_level');
                         }
 
                         if($item->deeper){
-                            if(isset($item->submenus_width) || $item->left_margin || $item->column_background_color || isset($item->submenu_container_height)){
+                            if(isset($item->submenus_width) || isset($item->left_margin) || isset($item->column_background_color) || isset($item->submenu_container_height)){
                                 $item->styles = ' style="';
                                 $item->innerstyles = 'style="width:auto; ';
                                 if($item->left_margin){
