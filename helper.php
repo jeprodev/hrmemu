@@ -287,6 +287,7 @@ class modHrMenuHelper
         foreach($items as $item) {
             if($item->id == $id ){ return $item; }
         }
+        return null;
     }
 
     static function createModuleList(){
@@ -317,7 +318,7 @@ class modHrMenuHelper
             $imagePath .= $tempArr[count($tempArr) - 1];
             return $imagePath;
         }else{
-
+            return '';
         }
     }
 }

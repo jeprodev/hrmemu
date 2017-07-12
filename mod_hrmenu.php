@@ -107,7 +107,7 @@ if($hrMenuLayout == 'vertical'){
         if($languageDirection == ''){
             //$document->addStyleSheet(JURI::base(true) . '/modules/mod_hrmenu/assets/themes/' . $hrMenuTheme . '/css/hrmenu_rtl.css.php?hrmenu_id=' . $menuId);
         }else{
-            $document->addStyleSheet(JURI::base(true) . '/modules/mod_hrmenu/assets/themes/' . $hrMenuTheme . '/css/hrmenu.css');
+            $document->addStyleSheet(JURI::base(true) . '/modules/mod_hrmenu/assets/themes/' . $hrMenuTheme . '/css/hrmenu.css', "text/css", "screen");
             //$document->addStyleSheet(JURI::base(true) . '/modules/mod_hrmenu/assets/themes/' . $hrMenuTheme . '/css/hrmenu.css.php?hrmenu_id=' . $menuId);
         }
     }
@@ -128,21 +128,21 @@ JHtml::_('jquery.framework');
 $document->addScript(JURI::base(). 'modules/mod_hrmenu/assets/js/hrmenu.js');
 $script = "jQuery(document).ready(function(){";
 $script .= "jQuery('#" . $menuId . "').DropDownHrMenu({";
-$script .= "fx_transition: '" . $menuTransition . "', ";
-$script .= "fx_duration : " . (int) $menuFxDuration . ", ";
-$script .= "menuId: '" . $menuId . "', ";
+$script .= "fx: {transition: '" . $menuTransition . "', ";
+$script .= "duration : " . (int) $menuFxDuration . "}, ";
+$script .= "menu_id: '" . $menuId . "', ";
 $script .= "test_overflow: '" . (int)$menuTestOverFlow . "', ";
 $script .= "behavior : '" . $behavior . "', ";
 $script .= "open_type: '" . $menuOpenType . "', ";
 $script .= "time_in:" . (int)$menuTimeIn .", ";
 $script .= "time_out:" . (int)$menuTimeOut . ", ";
-$script .= "is_mobile:". $isMobile . ", item_width: " . $menuWidth . ", item_height: " . $menuHeight . ",";
-$script .= "show_active_sub_items : '1' ";
+$script .= "is_mobile:". $isMobile . ", item: {width: " . $menuWidth . ", height: " . $menuHeight . "},";
+$script .= "show_active_sub_items : '0' ";
 $script .= "}); });";
 
 $document->addScriptDeclaration($script);
 
-/** adding fancy effect */
+/** adding fancy effect * /
 //if( $menuUseFancy == 1){
 $document->addScript(JURI::base() . '/modules/mod_hrmenu/assets/js/hrmenu_fancy.js');
 $js = "jQuery(document).ready(function(){";
@@ -151,6 +151,6 @@ $js .= " fancyTransition : '" . $fancyTransition . "', ";
 $js .= " fancyDuration : " . (int) $fancyDuration . "}); });";
 
 $document->addScriptDeclaration($js);
-//}
+//} */
 
 require JModuleHelper::getLayoutPath('mod_hrmenu', $params->get('hrmenu_template', 'default'));

@@ -2,11 +2,15 @@
     $.fn.DropDownHrMenu = function(opts){
         //setting default options
         var defaults = {
-            fx_transition: 'linear',
-            fx_duration : 500,
-            menuId: 'hrmenu',
-            item_width : 160,
-            item_height: 30,
+            fx: {
+                transition: 'linear',
+                duration : 500
+            },
+            menu_id: 'hrmenu',
+            item : {
+                width : 160,
+                height: 30
+            },
             level1_font_size: 18,
             test_overflow: '0',
             orientation : 'horizontal',
@@ -18,7 +22,7 @@
             time_in:0,
             time_out: 500,
             is_mobile:false,
-            menu_position: '0',
+            menu_position: 'top_fixed',
             effect_type : 'drop_down',
             show_active_sub_items : '0'
         };
@@ -26,14 +30,14 @@
         /** calling default options **/
         var options = $.extend(defaults, opts);
         var hrMenuObj = this;
-        var status = new Array();
+        var status = [];
         //var slide_container;
 
         /** act upon the element that is passed into the design **/
         return hrMenuObj.each(function(){
             hrMenuInit();
 
-            if(defaults.menu_position == 'top_fixed'){
+            if(options.menu_position === 'top_fixed'){
                 var menu_y = $(this).offset().top;
                 $(document.body).attr('data-margintop', $(document.body).css('margin-top'));
                 hrMenuObj.menu_height = $(this).height();
@@ -46,22 +50,23 @@
                         hrMenuObj.removeClass('hrmenu_fixed')
                     }
                 });
-            }else if(defaults.menu_position == 'bottom_fixed'){
+            }else if(options.menu_position === 'bottom_fixed'){
                 $(this).addClass('hrmenu_fixed').find('ul.nav_hrmenu').css('position', 'static');
             }
         });
 
         function hrMenuInit(){
             var menu = $('#hrmenu_logo');
+            var elements;
             var menuList = $('.hrmenu_wrapper_menu', hrMenuObj);
             menu.data('status', 'closed');
-            if(options.effect_type == 'push_down'){
+            if(options.effect_type === 'push_down'){
                 $('li.hrmenu.level1', hrMenuObj).each(function(index, elt){
                     if(!$(elt).hasClass('parent')){
                         $(elt).mouseenter(function(){
                             $('li.hrmenu.level1.parent', hrMenuObj).each(function(j, elt2){
                                 elt2 = $(elt2);
-                                if($(elt).prop('class') != elt2.prop('class')){
+                                if($(elt).prop('class') !== elt2.prop('class')){
                                     elt2.submenu = $('> .hrmenu_push_down > .hrmenu_float', hrMenuObj).eq(j);
                                     hideSubHrMenu(elt2);
                                 }
@@ -69,12 +74,12 @@
                         });
                     }
                 });
-                elts = $('li.hrmenu.level1.parent', hrMenuObj);
+                elements = $('li.hrmenu.level1.parent', hrMenuObj);
             }else{
-                elts = $('li.hrmenu.parent', hrMenuObj);
+                elements = $('li.hrmenu.parent', hrMenuObj);
             }
 
-            elts.each(function(i, el){
+            elements.each(function(i, el){
                 el = $(el);
                 if(el.hasClass('no_drop_down')){ return true; }
 
@@ -85,7 +90,7 @@
                 });
 
                 // manage sub menus
-                if(options.effect_type == 'push_down'){
+                if(options.effect_type === 'push_down'){
                     el.submenu = $('> .hrmenu_push_down > .hrmenu_float', hrMenuObj).eq(i);
                     el.submenu.find('> .hrmenu_drop_main').css('width', 'inherit').css('overflow', 'hidden');
                 }else{
@@ -95,10 +100,10 @@
                 }
 
                 el.submenu_height = el.submenu.height();
-                el.submenu.css('width', options.item_width + 'px');
+                el.submenu.css('width', options.item.width + 'px');
                 el.submenu_width = el.submenu.width();
 
-                if(options.open_type == 'no_effect' || options.open_type == 'open' || options.open_type == 'slide'){
+                if(options.open_type === 'no_effect' || options.open_type === 'open' || options.open_type === 'slide'){
                     el.submenu.css('display', 'none');
                 }else{
                     el.submenu.css('display', 'block');
@@ -106,7 +111,7 @@
                 }
 
                 //manage active sub menus
-                if((options.show_active_sub_items == '1' && el.hasClass('active')) || el.hasClass('hrmenu_open')){
+                if((options.show_active_sub_items === '1' && el.hasClass('active')) || el.hasClass('hrmenu_open')){
                     if(el.hasClass('full_width')){
                         el.submenu.css('display', 'block').css('left', '0');
                     }else{
@@ -117,23 +122,23 @@
                 }
 
                 // manage inverse direction
-                if(options.fx_direction == 'inverse' && el.hasClass('level1') && options.orientation == 'horizontal'){
+                if(options.fx.direction === 'inverse' && el.hasClass('level1') && options.orientation === 'horizontal'){
                     el.submenu.css('bottom', options.direction_offset1 + 'px');
                 }
-                if(options.fx_direction == 'inverse' && el.hasClass('level1') && options.orientation == 'vertical'){
+                if(options.fx.direction === 'inverse' && el.hasClass('level1') && options.orientation === 'vertical'){
                     el.submenu.css('right', options.direction_offset1 + 'px');
                 }
-                if(options.fx_direction == 'inverse' && el.hasClass('level1') && options.orientation == 'vertical'){
+                if(options.fx.direction === 'inverse' && el.hasClass('level1') && options.orientation === 'vertical'){
                     el.submenu.css('right', options.direction_offset2 + 'px');
                 }
 
-                if(options.behavior == 'click_close'){
+                if(options.behavior === 'click_close'){
                     el.mouseenter(function(){
-                        if(options.test_overflow == '1'){ testHrMenuOverflow(); }
+                        if(options.test_overflow === '1'){ testHrMenuOverflow(); }
                         $('li.hrmenu.parent.level' + el.data('level'), hrMenuObj).each(function(j, el2){
                             el2 = $(el2);
-                            if(el.prop('class') != el2.prop('class')){
-                                if(option.effect_type == 'push_down'){
+                            if(el.prop('class') !== el2.prop('class')){
+                                if(options.effect_type === 'push_down'){
                                     el2.submenu = $('> .hrmenu_push_down > .hrmenu_float', hrMenuObj).eq(j);
                                 }else{
                                     el2.submenu = $('> .hrmenu_float', el2);
@@ -145,7 +150,7 @@
                     });
 
                     $('> div >.hrmenu_close', el).click(function(){ hideSubHrMenu(el); });
-                }else if(options.behavior == 'click'){
+                }else if(options.behavior === 'click'){
                     if(el.hasClass('parent') && $('> a.hrmenu', el).length){
                         el.redirection = $('> a.hrmenu', el).prop('href');
                         $('> a.hrmenu', el).prop('href', 'javascript:void(0)');
@@ -155,15 +160,15 @@
                     $('> a.hrmenu, > div.separator, > div.nav_header', el).click(function(){
                         $('li.hrmenu.level' + $(el).attr('data-level'), hrMenuObj).removeClass('hrmenu_clicked').removeClass('hrmenu_open');
                         el.addClass('hrmenu_clicked');
-                        if(options.test_overflow == '1'){ testHrMenuOverflow(el); }
-                        if(el.data('status') == 'opened'){
+                        if(options.test_overflow === '1'){ testHrMenuOverflow(el); }
+                        if(el.data('status') === 'opened'){
                             $('li.hrmenu', $(el)).removeClass('hrmenu_clicked').removeClass('hrmenu_open');
                             $(el).removeClass('hrmenu_clicked').removeClass('hrmenu_open');
                             hideSubHrMenu(el);
                             $('li.hrmenu.parent:not(.no_drop_down)', el).each(function(j, el2){
                                 el2 = $(el2);
-                                if(el.prop('class') != el2.prop('class')){
-                                    if(options.effect_type == 'push_down'){
+                                if(el.prop('class') !== el2.prop('class')){
+                                    if(options.effect_type === 'push_down'){
                                         el2.submenu = $('> .hrmenu_push_down > .hrmenu_float', hrMenuObj).eq(j);
                                     }else{
                                         el2.submenu = $('> .hrmenu_float', el2);
@@ -174,8 +179,8 @@
                         }else{
                             $('li.hrmenu.parent.level' + el.data('level'), hrMenuObj).each(function(j, el2){
                                 el2 = $(el2);
-                                if(el.prop('class') != el2.prop('class')){
-                                    if(options.effect_type == 'push_down'){
+                                if(el.prop('class') !== el2.prop('class')){
+                                    if(options.effect_type === 'push_down'){
                                         el2.submenu = $('> .hrmenu_push_down > .hrmenu_float', hrMenuObj).eq(j);
                                     }else{
                                         el2.submenu = $('> .hrmenu_float', el2);
@@ -188,23 +193,23 @@
                     });
                 }else{
                     el.mouseenter(function(){
-                        if(options.effect_type == 'push_down'){
+                        if(options.effect_type === 'push_down'){
                             $('li.hrmenu.level1.parent', hrMenuObj).each(function(j, el2) {
                                 el2 = $(el2);
-                                if(el.prop('class') != el2.prop('class')){
+                                if(el.prop('class') !== el2.prop('class')){
                                     el2.submenu = $('> .hrmenu_push_down > .hrmenu_float', hrMenuObj).eq(j);
                                     hideSubHrMenu(el2);
                                 }
                             });
                         }else{
-                            if(options.test_overflow == '1'){
+                            if(options.test_overflow === '1'){
                                 testHrMenuOverflow(el);
                             }
                         }
                         showSubHrMenu(el);
                     });
 
-                    if(options.effect_type == 'push_down'){
+                    if(options.effect_type === 'push_down'){
                         hrMenuObj.mouseleave(function(){ hideSubHrMenu(el); });
                     }else{
                         el.mouseleave(function(){ hideSubHrMenu(el); });
@@ -216,11 +221,11 @@
             if(options.is_mobile){
                 menuList.slideUp("fast");
                 menu.click(function(){
-                    if(menu.data('status') == 'opened'){
+                    if(menu.data('status') === 'opened'){
                         menu.data('status', 'closing');
                         menuList.slideUp("slow");
                         menu.data('status', 'closed');
-                    }else if(menu.data('status') == 'closed'){
+                    }else if(menu.data('status') === 'closed'){
                         menu.data('status', 'opening');
                         menuList.slideDown("slow");
                         menu.data('status', 'opened');
@@ -261,7 +266,7 @@
                     el.data('status', 'closed');
                     break;
                 case 'slide' :
-                    if(el.hasClass('level1') && options.orientation == 'horizontal'){
+                    if(el.hasClass('level1') && options.orientation === 'horizontal'){
                         el.submenu.css('max-height', '');
                     }else{
                         el.submenu.css('max-width', '');
@@ -277,7 +282,7 @@
                     status[el.data('level')] = '';
                     el.submenu.css('overflow', 'hidden');
                     el.data('status', 'closing');
-                    if(el.hasClass('level1') && options.orientation =='horizontal'){
+                    if(el.hasClass('level1') && options.orientation === 'horizontal'){
                         el.submenu.css('overflow', 'hidden').css('max-height', el.submenu.height()).animate({ 'max-height' : 0 }, {
                             duration: fxDuration, queue: false, easing: fxTransition, complete: function(){
                                 el.submenu.css('max-height', '');
@@ -310,24 +315,24 @@
 
         function openHrMenu(el){
             var subMenu = $(el.submenu);
-            var fxDuration = options.fx_duration;
-            var fxTransition = options.fx_transition;
+            var fxDuration = options.fx.duration;
+            var fxTransition = options.fx.transition;
             var slideContainer;
             if(el.data('status') === 'opened' || (status[el.data('level') - 1] === 'showing' && options.open_type === 'drop')) return;
             subMenu.stop(true, true);
             subMenu.css('left', 'auto');
             el.submenu.css('display', 'block');
 
-            if(options.effect_type == 'push_down'){ el.submenu.css('position', 'relative'); }
+            if(options.effect_type === 'push_down'){ el.submenu.css('position', 'relative'); }
             if(options.open_type !== 'no_effect'){ status[el.data('level')] = 'showing'; }
             switch(options.open_type){
                 case 'slide' :
-                    if(el.data('status') == 'opening'){ break; }
+                    if(el.data('status') === 'opening'){ break; }
                     el.data('status', 'opening');
                     el.submenu.css('overflow', 'hidden');
                     el.submenu.stop(true, true);
                     slideContainer = $('.hrmenu_2', el);
-                    if(el.hasClass('level1') && options.orientation == 'horizontal'){
+                    if(el.hasClass('level1') && options.orientation === 'horizontal'){
                         slideContainer.css('marginTop', -el.submenu_height);
                         slideContainer.animate({ marginTop:0}, {
                             duration: fxDuration, queue: false, easing: fxTransition, complete: function(){
@@ -388,7 +393,7 @@
                     break;
                 case 'scale':
                     el.data('status', 'opening');
-                    if(!el.hasClass('status') || options.orientation == 'vertical'){
+                    if(!el.hasClass('status') || options.orientation === 'vertical'){
                         el.submenu.css('margin-left', el.submenu.width());
                     }
                     el.submenu.hide();
@@ -407,7 +412,7 @@
                     break;
                 case 'puff':
                     el.data('status', 'opening');
-                    if(!el.hasClass('level1') || options.orientation == 'vertical'){
+                    if(!el.hasClass('level1') || options.orientation === 'vertical'){
                         el.submenu.css('margin-left', el.submenu.width());
                     }
                     el.submenu.stop(true, true);
@@ -424,12 +429,12 @@
                     el.data('status', 'opening');
                     el.submenu.stop();
                     el.submenu.css('overflow', 'hidden');
-                    if(el.hasClass('level1') && options.orientation == 'horizontal'){
+                    if(el.hasClass('level1') && options.orientation === 'horizontal'){
                         el.submenu.animate({ 'max-height' : el.submenu_height }, {
                             duration: fxDuration, queue: false, easing: fxTransition, complete: function(){
                                 $(this).css('max-height', '');
                                 status[el.data('level')] = '';
-                                if(options.effect_type == 'drop_down'){ el.submenu.css('overflow', 'visible'); }
+                                if(options.effect_type === 'drop_down'){ el.submenu.css('overflow', 'visible'); }
                                 el.data('status', 'opened');
                             }
                         });
@@ -438,7 +443,7 @@
                             duration: fxDuration, queue: false, easing: fxTransition, complete: function(){
                                 $(this).css('max-width', '');
                                 status[el.data('level')] = '';
-                                if(options.effect_type == 'drop_down'){ el.submenu.css('overflow', 'visible'); }
+                                if(options.effect_type === 'drop_down'){ el.submenu.css('overflow', 'visible'); }
                                 el.data('status', 'opened')
                             }
                         })
@@ -449,17 +454,17 @@
 
         function showSubHrMenu(el){
             el.css('z-index', 15000);
-            el.submenu.css('z-index', 15000)
+            el.submenu.css('z-index', 15000);
             clearTimeout(el.time_out);
             el.time_out = setTimeout(function(){ openHrMenu(el); }, options.time_in);
         }
 
         function hideSubHrMenu(el){
-            if(options.effect_type == 'push_down' && el.data('status') != 'closing'){
+            if(options.effect_type === 'push_down' && el.data('status') !== 'closing'){
                 closeHrMenu(el);
-            }else if(options.effect_type != 'push_down'){
+            }else if(options.effect_type !== 'push_down'){
                 el.css('z-index', 12001);
-                el.submenu.css('z-index', 12001)
+                el.submenu.css('z-index', 12001);
                 clearTimeout(el.time_out);
                 el.time_out = setTimeout(function(){ closeHrMenu(el); }, options.time_out);
             }
